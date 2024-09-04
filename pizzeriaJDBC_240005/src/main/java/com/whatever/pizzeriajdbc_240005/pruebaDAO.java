@@ -37,7 +37,7 @@ public class pruebaDAO {
 
 //        System.out.println(productoDAO.consultar(3));
 
-        System.out.println(productoDAO.cconsultarTodo());
+        productoDAO.cconsultarTodo();
     }
 
 }

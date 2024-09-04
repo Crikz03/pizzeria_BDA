@@ -1,1 +1,7 @@
+DAO\ProductoDAO.class
+Objetos\Producto.class
+com\whatever\pizzeriajdbc_240005\pruebaDAO.class
+Conexion\ConexionBD.class
 com\whatever\pizzeriajdbc_240005\PizzeriaJDBC_240005.class
+Conexion\IConexionBD.class
+Interfaces\IProductoDAO.class

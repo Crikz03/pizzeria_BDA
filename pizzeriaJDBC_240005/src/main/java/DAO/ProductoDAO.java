@@ -129,6 +129,10 @@ public class ProductoDAO implements IProductoDAO {
                     producto.setDescripcion(rs.getString("descripcion"));
 
                     productos.add(producto);
+
+
+                    System.out.println("Producto: " + producto);
+                    System.out.println("----------");
                 }
             }
         } catch (SQLException ex) {
