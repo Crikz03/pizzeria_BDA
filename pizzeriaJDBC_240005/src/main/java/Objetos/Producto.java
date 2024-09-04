@@ -29,6 +29,12 @@ public class Producto {
         this.precio = precio;
     }
 
+    public Producto(String nombre, String descripcion, float precio) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+    }
+
     public int getId() {
         return id;
     }

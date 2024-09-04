@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,7 +39,7 @@ public class ProductoDAO implements IProductoDAO {
             i.setFloat(2, producto.getPrecio());
             i.setString(3, producto.getDescripcion());
 
-            i.executeUpdate();
+            i.execute();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -48,12 +49,41 @@ public class ProductoDAO implements IProductoDAO {
 
     @Override
     public boolean actualizar(Producto producto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sentencia = "UPDATE productos SET nombre = ?, precio = ?, descripcion = ? WHERE id = ?";
+        try (Connection bd = conexion.crearConexion(); PreparedStatement i = bd.prepareStatement(sentencia)) {
+            i.setString(1, producto.getNombre());
+            i.setFloat(2, producto.getPrecio());
+            i.setString(3, producto.getDescripcion());
+
+            i.executeUpdate();
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
     @Override
     public boolean eliminar(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sentencia = "DELETE FROM productos WHERE id = ?;";
+
+        try (Connection bd = conexion.crearConexion(); PreparedStatement i = bd.prepareStatement(sentencia)) {
+
+            i.setInt(1, id);
+
+            int encontrado = i.executeUpdate();
+
+            if (encontrado == 0) {
+                System.out.println("No se encontro el producto con id: " + id);
+            }
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
@@ -86,7 +116,25 @@ public class ProductoDAO implements IProductoDAO {
 
     @Override
     public List<Producto> cconsultarTodo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<Producto> productos = new ArrayList<>();
+        String busqueda = "SELECT * FROM productos";
+
+        try (Connection bd = conexion.crearConexion(); PreparedStatement i = bd.prepareStatement(busqueda)) {
+            try (ResultSet rs = i.executeQuery()) {
+                while (rs.next()) {
+                    Producto producto = new Producto();
+                    producto.setId(rs.getInt("id"));
+                    producto.setNombre(rs.getString("nombre"));
+                    producto.setPrecio(rs.getFloat("precio"));
+                    producto.setDescripcion(rs.getString("descripcion"));
+
+                    productos.add(producto);
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return productos;
     }
 
 }
