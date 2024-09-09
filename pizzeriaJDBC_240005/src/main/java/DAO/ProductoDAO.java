@@ -54,6 +54,7 @@ public class ProductoDAO implements IProductoDAO {
             i.setString(1, producto.getNombre());
             i.setFloat(2, producto.getPrecio());
             i.setString(3, producto.getDescripcion());
+            i.setInt(4, producto.getId());
 
             i.executeUpdate();
             return true;
@@ -130,9 +131,6 @@ public class ProductoDAO implements IProductoDAO {
 
                     productos.add(producto);
 
-
-                    System.out.println("Producto: " + producto);
-                    System.out.println("----------");
                 }
             }
         } catch (SQLException ex) {
