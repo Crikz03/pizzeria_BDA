@@ -207,16 +207,14 @@ public class Frmprincipal extends javax.swing.JFrame {
 
     private void bAccion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAccion1ActionPerformed
         if (productoSeleccionado == null) {
-            // Si no hay producto seleccionado, agregar uno nuevo
             agregarProducto();
         } else {
-            // Si hay un producto seleccionado, actualizarlo
             actualizarProducto();
-            productoSeleccionado = null; // Reiniciar la selección después de la actualización
+            productoSeleccionado = null; 
         }
         limpiarCampos();
-        actualizarTabla(); // Actualizar la tabla después de agregar o actualizar
-        bAccion1.setText("Guardar"); // Volver a 'Guardar' para nuevas inserciones
+        actualizarTabla(); 
+        bAccion1.setText("Guardar"); 
         bAccion3.setText("Cancelar");
 
     }//GEN-LAST:event_bAccion1ActionPerformed
@@ -296,7 +294,7 @@ public class Frmprincipal extends javax.swing.JFrame {
 
     private void actualizarProducto() {
 
-        Producto productoSeleccionado = obtenerProductoSeleccionadoDeTabla(); // Esto debe devolver el producto seleccionado de la tabla
+        Producto productoSeleccionado = obtenerProductoSeleccionadoDeTabla(); 
         if (productoSeleccionado != null) {
             productoSeleccionado.setNombre(txtNombre.getText());
             productoSeleccionado.setPrecio(parseFloat(txtPrecio.getText()));
@@ -365,7 +363,7 @@ public class Frmprincipal extends javax.swing.JFrame {
         int filaSeleccionada = tblProductos.getSelectedRow();
         if (filaSeleccionada != -1) {
             Producto producto = new Producto();
-            producto.setId((Integer) tblProductos.getValueAt(filaSeleccionada, 0)); // Suponiendo que el ID está en la primera columna
+            producto.setId((Integer) tblProductos.getValueAt(filaSeleccionada, 0)); 
             producto.setNombre((String) tblProductos.getValueAt(filaSeleccionada, 1));
             producto.setPrecio((Float) tblProductos.getValueAt(filaSeleccionada, 2));
             producto.setDescripcion((String) tblProductos.getValueAt(filaSeleccionada, 3));
